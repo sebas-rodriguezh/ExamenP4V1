@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/presentation/planMedico") //Profe, esto lo usé para poder hacer los redirect de manera correcta.
 public class PlanMedicoController
 {
     @Autowired Service service;
 
-    @GetMapping("/planMedico")
+    @GetMapping("/presentation/planMedico/planMedico")
     public String show(Model model, HttpSession session)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
@@ -26,12 +25,12 @@ public class PlanMedicoController
         {
             return "redirect:/login";
         }
-        Farmacia farmacia = service.obtenerFarmaciaPorUsuario(usuarioId); //Pendiente.
+        Farmacia farmacia = service.obtenerFarmaciaPorUsuario(usuarioId);
         model.addAttribute("farmacia", farmacia);
         return "presentation/planMedico/planMedico";
     }
 
-    @GetMapping("/refrescar")
+    @GetMapping("/presentation/planMedico/refrescar")
     public String refrescar(HttpSession session, Model model, @RequestParam(required = false) String pacienteId)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
@@ -63,7 +62,7 @@ public class PlanMedicoController
         return "presentation/planMedico/planMedico";
     }
 
-    @PostMapping("/medicamento/registrar")
+    @PostMapping("/presentation/planMedico/medicamento/registrar")
     public String registrar (HttpSession session, @RequestParam Integer cantidad, @RequestParam String pacienteId, @RequestParam Integer pmId)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
@@ -76,7 +75,7 @@ public class PlanMedicoController
 
     }
 
-    @PostMapping("/medicamento/entregar")
+    @PostMapping("/presentation/planMedico/medicamento/entregar")
     public String entregar (HttpSession session, Model model, @RequestParam Integer pmId,  @RequestParam String pacienteId)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
@@ -101,5 +100,4 @@ public class PlanMedicoController
         }
         return "redirect:/presentation/planMedico/refrescar?pacienteId=" + pacienteId;
     }
-
 }

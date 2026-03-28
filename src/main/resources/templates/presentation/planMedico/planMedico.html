@@ -2,45 +2,44 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Plan Paciente</title>
+    <title>Medicamento Paciente</title>
+    <link rel="stylesheet" th:href="@{/css/planMedico.css}">
 </head>
-<body>
 
+<body>
 <div align="center">
     <img src="/images/header.jpg" alt="FarmaciaHeader">
 </div>
 
-<div style="background:#004080; color:white; padding:8px; text-align:center;">
+<div class="navbar">
     <span th:text="${session.usuarioId}">USUARIO</span>
-    &nbsp;|&nbsp;
-    <a href="/logout" style="color:white;">LOGOUT</a>
+    <a href="/logout">LOGOUT</a>
 </div>
 
-<h2 style="color:orange; text-align:center;">
-    Farmacia:
-    <span th:if="${farmacia != null}" th:text="${farmacia.nombre}"></span>
+<h2 class="titulo-farmacia">
+    Farmacia: <span th:if="${farmacia != null}" th:text="${farmacia.nombre}"></span>
 </h2>
 
-<div align="center" style="margin:10px;">
+<div align="center" class="seccion-busqueda">
     <form action="/presentation/planMedico/refrescar" method="get">
-        <label style="color:orange;"><b>Paciente:</b></label>
+        <label class="label-naranja"><b>Paciente:</b></label>
         <input type="text" name="pacienteId" th:value="${pacienteId}" />
         <button type="submit">Buscar</button>
-        <span th:if="${paciente != null}" th:text="${paciente.nombre}" style="margin-left:10px;"></span>
-        <span th:if="${errorPaciente != null}" th:text="${errorPaciente}" style="color:red; margin-left:10px;"></span>
+        <span th:if="${paciente != null}" th:text="${paciente.nombre}" class="nombre-paciente"></span>
+        <span th:if="${errorPaciente != null}" th:text="${errorPaciente}" class="error-paciente"></span>
     </form>
 </div>
 
-<div th:if="${medicamentos != null}" align="center" style="margin:10px;">
+<div th:if="${medicamentos != null}" align="center" class="seccion-medicamentos">
 
-    <div th:if="${errorEntrega != null}" style="color:red;" th:text="${errorEntrega}"></div>
+    <div th:if="${errorEntrega != null}" class="error-entrega" th:text="${errorEntrega}"></div>
 
     <br>
 
     <form action="/presentation/planMedico/medicamento/registrar" method="post">
         <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
 
-        <label style="color:orange;"><b>Medicamento:</b></label>
+        <label class="label-naranja"><b>Medicamento:</b></label>
         <select name="pmId">
             <option th:each="pm : ${medicamentos}"
                     th:value="${pm.id}"
@@ -48,8 +47,8 @@
             </option>
         </select>
 
-        <label  style="color:orange;"><b>Cant. Dosis:</b></label>
-        <input type="number" name="cantidad" value="1" min="1" style="width:60px;" />
+        <label class="label-naranja"><b>Cant. Dosis:</b></label>
+        <input type="number" name="cantidad" value="1" min="1" class="input-cantidad"/>
 
 <!--        Esto es profe, es para que pueda tomar la info del mismo form.-->
         <button type="submit" formaction="/presentation/planMedico/medicamento/registrar">Registrar</button>
@@ -58,8 +57,8 @@
 
 </div>
 
-<div style="background:#004080; color:white; padding:8px; text-align:center; margin-top:40px;">
-    Todos los derechos reservados . 2026 . TotalSoft Inc. info@tsinc.com
+<div class="footer">
+    Todos los derechos reservados. 2026. TotalSoft Inc. info@tsinc.com
 </div>
 
 </body>

@@ -1,0 +1,21 @@
+.navbar-ingreso {
+    background: #004080;
+    color: white;
+    padding: 8px;
+    text-align: center;
+}
+
+.error {
+    color: red;
+}
+
+.footer {
+    background: #004080;
+    color: white;
+    padding: 8px;
+    text-align: center;
+}
+
+.td-label {
+    color: orange;
+}

@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FarmaciaRepository extends JpaRepository<Farmacia,String> {
-    Farmacia findByUsuarioId(String idUsuario);
 }

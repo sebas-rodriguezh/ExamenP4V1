@@ -59,7 +59,15 @@ public class Service
         Pacientemedicamento pm = pacienteMedicamentoRepository.findById(pacienteMedicamentoId).orElse(null);
         if (pm != null)
         {
-            int actual = pm.getDosisafavor() == null ? 0 : pm.getDosisafavor();
+            int actual;
+            if (pm.getDosisafavor() == null)
+            {
+                actual = 0;
+            }
+            else
+            {
+                actual = pm.getDosisafavor();
+            }
             pm.setDosisafavor(actual+cantidad);
             pacienteMedicamentoRepository.save(pm);
         }
@@ -73,15 +81,32 @@ public class Service
             return "Registro no encontrado";
         }
 
-        int plan = pm.getMedicamento().getPlan() == null ? 0 : pm.getMedicamento().getPlan();
-        int acumuladas = pm.getDosisafavor() == null ? 0 : pm.getDosisafavor();
+        int plan;
+        if (pm.getMedicamento().getPlan() == null)
+        {
+            plan = 0;
+        }
+        else
+        {
+            plan = pm.getMedicamento().getPlan();
+        }
 
-        if (acumuladas < plan)
+        int lasquellevaAcumuladas;
+        if (pm.getDosisafavor() == null)
+        {
+            lasquellevaAcumuladas = 0;
+        }
+        else
+        {
+            lasquellevaAcumuladas = pm.getDosisafavor();
+        }
+
+        if (lasquellevaAcumuladas < plan)
         {
             return "No hay dosis suficientes para entregarle.";
         }
 
-        pm.setDosisafavor(acumuladas-plan);
+        pm.setDosisafavor(lasquellevaAcumuladas-plan);
         pacienteMedicamentoRepository.save(pm);
         return null;
     }

@@ -1,0 +1,52 @@
+.navbar {
+    background: #004080;
+    color: white;
+    padding: 8px;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+}
+
+.titulo-farmacia {
+    color: orange;
+    text-align: center;
+}
+
+.seccion-busqueda {
+    margin: 10px;
+}
+
+.label-naranja {
+    color: orange;
+}
+
+.nombre-paciente {
+    margin-left: 10px;
+}
+
+.error-paciente {
+    color: red;
+    margin-left: 10px;
+}
+
+.seccion-medicamentos {
+    margin: 10px;
+}
+
+.error-entrega {
+    color: red;
+}
+
+.input-cantidad {
+    width: 60px;
+}
+
+.footer {
+    background: #004080;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    margin-top: 40px;
+}
