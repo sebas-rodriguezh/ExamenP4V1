@@ -61,4 +61,44 @@ public class PlanMedicoController
         }
         return "presentation/planMedico/show";
     }
+
+    @PostMapping("/medicamento/registrar")
+    public String registrar (HttpSession session, @RequestParam Integer cantidad, @RequestParam String pacienteId, @RequestParam Integer pacienteMedicamentoId)
+    {
+        String usuarioId = session.getAttribute("usuarioId").toString();
+        if (usuarioId == null)
+        {
+            return "redirect:/login";
+        }
+        service.registrarCompra(pacienteMedicamentoId, cantidad);
+        return "redirect:/presentation/planMedico/refrescar?pacienteId=" + pacienteId;
+
+    }
+
+    @PostMapping("/medicamento/entregar")
+    public String entregar (HttpSession session, Model model, @RequestParam Integer pacienteMedicamentoId,  @RequestParam String pacienteId)
+    {
+        String usuarioId = session.getAttribute("usuarioId").toString();
+        if (usuarioId == null)
+        {
+            return "redirect:/login";
+        }
+        String error = service.entregarRegalia(pacienteMedicamentoId);
+
+        if (error != null)
+        {
+            Farmacia farmacia = service.obtenerFarmaciaPorUsuario(usuarioId);
+            Paciente paciente = service.buscarPaciente(pacienteId);
+            List<Pacientemedicamento> medicamentos = service.obtenerMedicamentosPaciente(pacienteId);
+
+            model.addAttribute("farmacia", farmacia);
+            model.addAttribute("pacienteId", pacienteId);
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("medicamentos", medicamentos);
+            model.addAttribute("errorEntrega", error);
+            return "presentation/planMedico/show";
+        }
+        return "redirect:/presentation/planMedico/refrescar?pacienteId=" + pacienteId;
+    }
+
 }
