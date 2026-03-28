@@ -73,7 +73,7 @@ public class Service
         }
     }
 
-    public String entregarRegalia (Integer pacienteMedicamentoId)
+    public String entregarRegalia (Integer pacienteMedicamentoId, Integer cantidad)
     {
         Pacientemedicamento pm = pacienteMedicamentoRepository.findById(pacienteMedicamentoId).orElse(null);
         if (pm == null)
@@ -101,12 +101,24 @@ public class Service
             lasquellevaAcumuladas = pm.getDosisafavor();
         }
 
-        if (lasquellevaAcumuladas < plan)
+        int cantidadEntrega;
+        if (cantidad == null)
+        {
+            cantidadEntrega = 1;
+        }
+        else
+        {
+            cantidadEntrega = cantidad;
+        }
+
+        int totalARestar = cantidadEntrega * plan;
+
+        if (lasquellevaAcumuladas < totalARestar)
         {
             return "No hay dosis suficientes para entregarle.";
         }
 
-        pm.setDosisafavor(lasquellevaAcumuladas-plan);
+        pm.setDosisafavor(lasquellevaAcumuladas - totalARestar);
         pacienteMedicamentoRepository.save(pm);
         return null;
     }
