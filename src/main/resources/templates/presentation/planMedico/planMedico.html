@@ -2,7 +2,8 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Medicamento Paciente</title>
+    <title>Plan Paciente</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <link rel="stylesheet" th:href="@{/css/planMedico.css}">
 </head>
 
@@ -40,10 +41,10 @@
         <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
 
         <label class="label-naranja"><b>Medicamento:</b></label>
-        <select name="pmId">
-            <option th:each="pm : ${medicamentos}"
-                    th:value="${pm.id}"
-                    th:text="${pm.medicamento.nombre} + ' (' + ${pm.medicamento.plan} + ' + 1) [' + ${pm.dosisafavor} + ']'">
+        <select name="pacientemedicamentoId">
+            <option th:each="pacientemedicamento : ${medicamentos}"
+                    th:value="${pacientemedicamento.id}"
+                    th:text="${pacientemedicamento.medicamento.nombre} + ' (' + ${pacientemedicamento.medicamento.plan} + ' + 1) [' + ${pacientemedicamento.dosisafavor} + ']'">
             </option>
         </select>
 

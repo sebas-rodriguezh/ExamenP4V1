@@ -63,27 +63,27 @@ public class PlanMedicoController
     }
 
     @PostMapping("/presentation/planMedico/medicamento/registrar")
-    public String registrar (HttpSession session, @RequestParam Integer cantidad, @RequestParam String pacienteId, @RequestParam Integer pmId)
+    public String registrar (HttpSession session, @RequestParam Integer cantidad, @RequestParam String pacienteId, @RequestParam Integer pacientemedicamentoId)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
         if (usuarioId == null)
         {
             return "redirect:/login";
         }
-        service.registrarCompra(pmId, cantidad);
+        service.registrarCompra(pacientemedicamentoId, cantidad);
         return "redirect:/presentation/planMedico/refrescar?pacienteId=" + pacienteId;
 
     }
 
     @PostMapping("/presentation/planMedico/medicamento/entregar")
-    public String entregar (HttpSession session, Model model, @RequestParam Integer pmId,  @RequestParam String pacienteId)
+    public String entregar (HttpSession session, Model model, @RequestParam Integer pacientemedicamentoId,  @RequestParam String pacienteId)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
         if (usuarioId == null)
         {
             return "redirect:/login";
         }
-        String error = service.entregarRegalia(pmId);
+        String error = service.entregarRegalia(pacientemedicamentoId);
 
         if (error != null)
         {
