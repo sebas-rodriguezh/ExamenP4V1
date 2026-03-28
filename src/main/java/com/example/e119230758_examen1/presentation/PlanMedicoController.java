@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/presentation/planMedico")
+@RequestMapping("/presentation/planMedico") //Profe, esto lo usé para poder hacer los redirect de manera correcta.
 public class PlanMedicoController
 {
     @Autowired Service service;
