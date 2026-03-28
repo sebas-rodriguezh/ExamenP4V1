@@ -1,14 +1,11 @@
 package com.example.e119230758_examen1.presentation;
 
 import jakarta.servlet.http.HttpSession;
-import com.example.e119230758_examen1.logic.Usuario;
 import com.example.e119230758_examen1.logic.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {

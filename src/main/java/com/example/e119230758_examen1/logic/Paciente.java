@@ -12,22 +12,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "usuario")
-public class Usuario {
+@Table(name = "paciente")
+public class Paciente {
     @Id
-    @Size(max = 10)
-    @Column(name = "id", nullable = false, length = 10)
+    @Size(max = 20)
+    @Column(name = "id", nullable = false, length = 20)
     private String id;
 
-    @Size(max = 100)
+    @Size(max = 30)
     @NotNull
-    @Column(name = "clave", nullable = false, length = 100)
-    private String clave;
-
-    @Size(max = 10)
-    @NotNull
-    @Column(name = "rol", nullable = false, length = 10)
-    private String rol;
+    @Column(name = "nombre", nullable = false, length = 30)
+    private String nombre;
 
 
 }

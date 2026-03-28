@@ -13,6 +13,20 @@ public class Service
     private UsuarioRepository usuarioRepository;
 
     @Autowired
+    private FarmaciaRepository farmaciaRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
+
+    @Autowired
+    private PacienteMedicamentoRepository pacienteMedicamentoRepository;
+
+
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     public Usuario autenticar (String idUsuario, String password)
@@ -28,4 +42,51 @@ public class Service
         return null;
     }
 
+    public Paciente buscarPaciente(String pacienteId)
+    {
+        return pacienteRepository.findById(pacienteId).orElse(null);
+    }
+
+    public List<Pacientemedicamento> obtenerMedicamentosPaciente (String pacienteId)
+    {
+        return pacienteMedicamentoRepository.findByPacienteId(pacienteId);
+    }
+
+    public Farmacia obtenerFarmaciaPorUsuario (String idUsuario)
+    {
+        return farmaciaRepository.findByUsuarioId(idUsuario).orElse(null);
+    }
+
+    public void registrarCompra (Integer pacienteMedicamentoId, Integer cantidad)
+    {
+        Pacientemedicamento pm = pacienteMedicamentoRepository.findById(pacienteMedicamentoId).orElse(null);
+        if (pm != null)
+        {
+            int actual = pm.getDosisafavor() == null ? 0 : pm.getDosisafavor();
+            pm.setDosisafavor(actual+cantidad);
+            pacienteMedicamentoRepository.save(pm);
+        }
+    }
+
+
+    public String entregarRegalia (Integer pacienteMedicamentoId)
+    {
+        Pacientemedicamento pm = pacienteMedicamentoRepository.findById(pacienteMedicamentoId).orElse(null);
+        if (pm == null)
+        {
+            return "Registro no encontrado";
+        }
+
+        int plan = pm.getMedicamento().getPlan() == null ? 0 : pm.getMedicamento().getPlan();
+        int acumuladas = pm.getDosisafavor() == null ? 0 : pm.getDosisafavor();
+
+        if (acumuladas < plan)
+        {
+            return "No hay dosis suficientes para entregarle.";
+        }
+
+        pm.setDosisafavor(acumuladas-plan);
+        pacienteMedicamentoRepository.save(pm);
+        return null;
+    }
 }
