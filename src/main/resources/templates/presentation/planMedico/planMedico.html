@@ -6,22 +6,22 @@
 </head>
 <body>
 
-<div style="text-align:center; font-weight:bold;">PATIENT CARE</div>
+<div align="center">
+    <img src="/images/header.jpg" alt="FarmaciaHeader">
+</div>
 
 <div style="background:#004080; color:white; padding:8px; text-align:center;">
     <span th:text="${session.usuarioId}">USUARIO</span>
-    &nbsp;|&nbsp;
     <a href="/logout" style="color:white;">LOGOUT</a>
 </div>
 
 <h2 style="color:orange; text-align:center;">
-    Farmacia: &nbsp;
+    Farmacia:
     <span th:if="${farmacia != null}" th:text="${farmacia.nombre}"></span>
 </h2>
 
-<!-- Búsqueda de paciente -->
-<div style="text-align:center; margin:10px;">
-    <form action="/presentation/plan/refrescar" method="get">
+<div align="center" style="margin:10px;">
+    <form action="/presentation/planMedico/refrescar" method="get">
         <label style="color:orange;"><b>Paciente:</b></label>
         <input type="text" name="pacienteId" th:value="${pacienteId}" />
         <button type="submit">Buscar</button>
@@ -30,46 +30,42 @@
     </form>
 </div>
 
-<div th:if="${medicamentos != null}" style="text-align:center; margin:10px;">
-
+<div th:if="${medicamentos != null}" align="center" style="margin:10px;">
     <div th:if="${errorEntrega != null}" style="color:red;" th:text="${errorEntrega}"></div>
 
+    <br>
 
-
-    <form action="/presentation/plan/medicamento/registrar" method="post">
+    <form action="/presentation/planMedico/medicamento/registrar" method="post">
         <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
-
         <label style="color:orange;"><b>Medicamento:</b></label>
-        <select name="pmId" id="pmId">
+        <select name="pmId">
             <option th:each="pm : ${medicamentos}"
                     th:value="${pm.id}"
-                    th:text="${pm.medicamento.nombre}
-                              + ' (' + ${pm.medicamento.plan} + ' + 1) '
-                              + '[' + ${pm.dosisafavor} + ']'">
+                    th:text="${pm.medicamento.nombre} + ' (' + ${pm.medicamento.plan} + ' + 1) ' + '[' + ${pm.dosisafavor} + ']'">
             </option>
         </select>
-
         <label><b>Cant. Dosis:</b></label>
         <input type="number" name="cantidad" value="1" min="1" style="width:60px;" />
         <button type="submit">Registrar</button>
     </form>
 
-    <form action="/presentation/plan/medicamento/entregar" method="post">
+    <br><br>
+
+    <form action="/presentation/planMedico/medicamento/entregar" method="post">
         <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
+        <label style="color:orange;"><b>Medicamento:</b></label>
         <select name="pmId">
             <option th:each="pm : ${medicamentos}"
                     th:value="${pm.id}"
-                    th:text="${pm.medicamento.nombre}
-                              + ' (' + ${pm.medicamento.plan} + ' + 1) '
-                              + '[' + ${pm.dosisafavor} + ']'">
+                    th:text="${pm.medicamento.nombre} + ' (' + ${pm.medicamento.plan} + ' + 1) ' + '[' + ${pm.dosisafavor} + ']'">
             </option>
         </select>
         <button type="submit">Entregar</button>
     </form>
-
 </div>
 
-<div style="text-align:center; margin-top:40px; font-size:12px;">
+
+<div style="background:#004080; color:white; padding:8px; text-align:center;">
     Todos los derechos reservados . 2026 . TotalSoft Inc. info@tsinc.com
 </div>
 

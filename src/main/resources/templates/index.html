@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Plan Pacientes</title>
-
 </head>
 <body>
+
+<div align="center">
+    <img src="/images/header.jpg" alt="FarmaciaHeader">
+</div>
+
 <div class="login-container">
     <div style="background:#004080; color:white; padding:8px; text-align:center;">
         INGRESO
     </div>
 
-    <div th:if="${error}" class="error" th:text="${error}"></div>
+    <div th:if="${error}" style="color:red;" th:text="${error}"></div>
 
-    <form action="/login" method="post">
-        <table style="margin:auto;">
+    <form action="/login" method="post" align="center">
+        <img src="/images/login.png" alt="Imagen_login"><br><br>
+        <table align="center">
             <tr>
                 <td style="color:orange;"><b>Id</b></td>
                 <td><input type="text" name="usuarioId" /></td>
@@ -24,14 +29,14 @@
                 <td><input type="password" name="password" /></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align:center;">
+                <td colspan="2" align="center">
                     <button type="submit">Ingresar</button>
                 </td>
             </tr>
         </table>
     </form>
 
-    <div style="text-align:center; margin-top:30px; font-size:12px;">
+    <div style="background:#004080; color:white; padding:8px; text-align:center;">
         Todos los derechos reservados . 2026 . TotalSoft Inc. info@tsinc.com
     </div>
 

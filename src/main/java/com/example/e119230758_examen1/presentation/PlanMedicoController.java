@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/presentation/planMedico")
 public class PlanMedicoController
 {
     @Autowired Service service;
 
-    @GetMapping("/show")
+    @GetMapping("/planMedico")
     public String show(Model model, HttpSession session)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
@@ -63,27 +64,27 @@ public class PlanMedicoController
     }
 
     @PostMapping("/medicamento/registrar")
-    public String registrar (HttpSession session, @RequestParam Integer cantidad, @RequestParam String pacienteId, @RequestParam Integer pacienteMedicamentoId)
+    public String registrar (HttpSession session, @RequestParam Integer cantidad, @RequestParam String pacienteId, @RequestParam Integer pmId)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
         if (usuarioId == null)
         {
             return "redirect:/login";
         }
-        service.registrarCompra(pacienteMedicamentoId, cantidad);
+        service.registrarCompra(pmId, cantidad);
         return "redirect:/presentation/planMedico/refrescar?pacienteId=" + pacienteId;
 
     }
 
     @PostMapping("/medicamento/entregar")
-    public String entregar (HttpSession session, Model model, @RequestParam Integer pacienteMedicamentoId,  @RequestParam String pacienteId)
+    public String entregar (HttpSession session, Model model, @RequestParam Integer pmId,  @RequestParam String pacienteId)
     {
         String usuarioId = session.getAttribute("usuarioId").toString();
         if (usuarioId == null)
         {
             return "redirect:/login";
         }
-        String error = service.entregarRegalia(pacienteMedicamentoId);
+        String error = service.entregarRegalia(pmId);
 
         if (error != null)
         {
