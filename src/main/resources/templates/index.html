@@ -2,28 +2,39 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar Sesión</title>
+    <title>Plan Pacientes</title>
 
 </head>
 <body>
 <div class="login-container">
-    <h2>Iniciar Sesión</h2>
+    <div style="background:#004080; color:white; padding:8px; text-align:center;">
+        INGRESO
+    </div>
 
     <div th:if="${error}" class="error" th:text="${error}"></div>
 
     <form action="/login" method="post">
-        <div>
-            <label for="usuarioId">Usuario ID:</label>
-            <input type="text" id="usuarioId" name="usuarioId" required autofocus>
-        </div>
-
-        <div>
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <button type="submit">Ingresar</button>
+        <table style="margin:auto;">
+            <tr>
+                <td style="color:orange;"><b>Id</b></td>
+                <td><input type="text" name="usuarioId" /></td>
+            </tr>
+            <tr>
+                <td style="color:orange;"><b>Clave</b></td>
+                <td><input type="password" name="password" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;">
+                    <button type="submit">Ingresar</button>
+                </td>
+            </tr>
+        </table>
     </form>
+
+    <div style="text-align:center; margin-top:30px; font-size:12px;">
+        Todos los derechos reservados . 2026 . TotalSoft Inc. info@tsinc.com
+    </div>
+
 </div>
 </body>
 </html>

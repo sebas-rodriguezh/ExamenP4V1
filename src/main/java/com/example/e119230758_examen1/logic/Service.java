@@ -24,8 +24,6 @@ public class Service
     @Autowired
     private PacienteMedicamentoRepository pacienteMedicamentoRepository;
 
-
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -52,9 +50,8 @@ public class Service
         return pacienteMedicamentoRepository.findByPacienteId(pacienteId);
     }
 
-    public Farmacia obtenerFarmaciaPorUsuario (String idUsuario)
-    {
-        return farmaciaRepository.findByUsuarioId(idUsuario).orElse(null);
+    public Farmacia obtenerFarmaciaPorUsuario(String usuarioId) {
+        return farmaciaRepository.findById(usuarioId).orElse(null);
     }
 
     public void registrarCompra (Integer pacienteMedicamentoId, Integer cantidad)
@@ -67,7 +64,6 @@ public class Service
             pacienteMedicamentoRepository.save(pm);
         }
     }
-
 
     public String entregarRegalia (Integer pacienteMedicamentoId)
     {

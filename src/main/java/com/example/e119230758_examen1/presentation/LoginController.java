@@ -19,7 +19,7 @@ public class LoginController {
     {
         if (session.getAttribute("usuarioId") != null)
         {
-            return "redirect:/presentation/planMedico/show";
+            return "redirect:/presentation/planMedico/planMedico";
         }
         return "/index";
     }
@@ -29,7 +29,7 @@ public class LoginController {
     {
         if (session.getAttribute("usuarioId") != null)
         {
-            return "redirect:/presentation/planMedico/show";
+            return "redirect:/presentation/planMedico/planMedico";
         }
         return "/index";
     }
@@ -49,7 +49,7 @@ public class LoginController {
         if (usuario != null)
         {
             session.setAttribute("usuarioId", usuario.getId());
-            return "redirect:/presentation/planMedico/show";
+            return "redirect:/presentation/planMedico/planMedico";
         }
         else
         {

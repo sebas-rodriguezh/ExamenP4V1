@@ -27,7 +27,7 @@ public class PlanMedicoController
         }
         Farmacia farmacia = service.obtenerFarmaciaPorUsuario(usuarioId); //Pendiente.
         model.addAttribute("farmacia", farmacia);
-        return "presentation/planMedico/show";
+        return "presentation/planMedico/planMedico";
     }
 
     @GetMapping("/refrescar")
@@ -59,7 +59,7 @@ public class PlanMedicoController
             }
 
         }
-        return "presentation/planMedico/show";
+        return "presentation/planMedico/planMedico";
     }
 
     @PostMapping("/medicamento/registrar")
@@ -96,7 +96,7 @@ public class PlanMedicoController
             model.addAttribute("paciente", paciente);
             model.addAttribute("medicamentos", medicamentos);
             model.addAttribute("errorEntrega", error);
-            return "presentation/planMedico/show";
+            return "presentation/planMedico/planMedico";
         }
         return "redirect:/presentation/planMedico/refrescar?pacienteId=" + pacienteId;
     }
